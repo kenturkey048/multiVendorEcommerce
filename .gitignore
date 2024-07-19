@@ -1,3 +1,5 @@
-.requirements.text
-.manage.py
-.db.sqlite3
+requirements.text
+manage.py
+db.sqlite3
+settings.py
+settingsprod.py
