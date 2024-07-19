@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<div class="pt-28 pb-10">
+  <div class="container mx-auto px-8">
+    <h1 class="text-center font-bold pt-6 mb-6 text-2xl capitalize md:text-4xl">Add New Product</h1>
+    <div class="flex justify-center gap-6">
+        <form  action="." method="POST" class="flex flex-col gap-6 border shadow-lg p-4" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mt-6">
+            {{form.category|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.category class="w-full rounded-md bg-slate-400 p-2 text-bold capitalize border" %}
+          </div>
+          <div>
+            {{form.title|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.title class="focus:bg-gray-300 w-full rounded-md bg-slate-400 p-2 text-sm border" %}
+          </div>
+
+          <div>
+            {{form.description|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.description class="w-full focus:bg-gray-300 h-full rounded-md bg-slate-400 p-2 text-bold capitalize border" %}
+          </div>
+
+          <div class="mt-6">
+            {{form.price|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.price class="w-full focus:bg-gray-300 rounded-md bg-slate-400 p-2 text-bold capitalize border" %}
+          </div>
+
+          <div>
+            {{form.image|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.image class="w-full rounded-md focus:bg-gray-300 bg-slate-400 p-2 text-bold capitalize border"%}
+          </div>
+
+          <div>
+            {{form.thumbnail|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.thumbnail class="w-full rounded-md focus:bg-gray-300 bg-slate-400 p-2 text-bold capitalize border" %}
+          </div>
+
+          <button class="px-3 py-2 bg-red-700 inline-block mb-6 text-white capitalize">Update Product</button>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

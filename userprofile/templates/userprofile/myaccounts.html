@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Order Detail-{{order.id}}{% endblock %}
+
+{% block content %}
+  <div class="pt-20 pb-6 mt-20">
+    <div class="px-8"> 
+      <div class="md:mx-20 xl:mx-36 space-x-8 mt-10 mb-10 flex items-center flex-col">
+        <a href="" class="inline-block bg-red-700 px-3 py-1.5 mt-6 text-white capitalize">Logout</a>
+      </div>
+      <div class="mt-10">
+        <h1 class="text-2xl text-center font-bold">My Products in this order</h1>
+        <div class="mt-6 ">
+          {% if order %}
+          {% for item in order.items.all %}
+          {% if item.product.user == request.user %}
+            <div class=" mt-6 mb-4 flex flex-col">
+                <div class="flex flex-row justify-between max-w-md mx-auto border p-3 bg-gray-200 shadow-lg text-center">
+                    <div class="flex flex-col items-center px-2 py-1 border bg-white w-16">
+                        <strong class="text-sm">Title</strong>
+                        <h1 class="text-xs">{{item.product.title}}</h1>
+                    </div>
+                    <div class="flex flex-col items-center px-2 py-1 border bg-white">
+                        <strong class="text-sm">Qty.</strong>
+                        <p class="text-xs">{{item.quantity}}</p>
+                    </div>
+                    <div class="flex flex-col items-center px-2 py-1 border bg-white">
+                        <strong class="text-sm">Price</strong>
+                        <h1 class="text-xs"><span>$</span>{{item.get_display_price}}</h1>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <p class="text-center text-lg">Your order list is empty</p>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

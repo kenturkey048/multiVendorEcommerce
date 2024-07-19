@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %}{{category.title}}{% endblock %}
+
+
+{% block content %}
+    <div class="mt-20 pt-16 pb-6 px-8">
+      <div>
+        <h1 class="font-bold text-4xl pt-10 capitalize pb-10 text-center pr-8">{{category.title}}</h1>
+        <div class="md:mx-20 xl:mx-36 lg:mx-32 grid grid-cols-1 gap-8 md:grid-cols-3 xl:grid-cols-4">
+          {% for product in products %}
+          <div class="w-60 h-96 rounded-md bg-slate-200 p-5">
+            <a href="{% url 'product_detail' product.category.slug product.slug %}"><img src="{{product.image.url}}" alt="" class="w-48 rounded-lg">
+            <div class="flex flex-col mt-6">
+              <p class="text-red-600 font-semibold text-xl">{{product.title}}</p>
+              <h3 class="font-bold text-2xl text-black">${{product.get_display_price}}</h3>
+            </a>
+            </div>
+            <div class="mt-6">
+              <a href="{% url 'add_to_cart' product.id %}" class="w-full bg-red-500 px-2 py-0.5 text-white">Add to cart</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

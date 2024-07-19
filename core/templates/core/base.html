@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+{% load static %}
+{% load menu %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Sneaks | {% block title %}{% endblock %}</title>
+</head>
+<body>
+ <header class="bg-white w-full left-0 top-0 z-50 fixed">
+    <nav class="container mx-auto h-14 bg-white relative flex justify-between items-center px-8">
+      <div class="flex items-center space-x-2">
+        <a href="{% url 'frontpage' %}" class="font-bold text-xl text-red-700">Sneak</a>
+        <div class="md:hidden text-center text-2xl mt-1" id="hamburger">
+          <i class="fa-solid fa-bars text-red-700 cursor-pointer"></i>
+        </div>
+      </div>
+      
+
+      <div class="hidden absolute bg-white top-0 left-0 w-full mx-auto md:static md:block md:py-0 md:w-auto py-40" id="nav-menu">
+        <ul class="flex flex-col items-center md:flex-row gap-10">
+          <li>{% menu %}</li>
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'myaccount' %}" class="font-bold text-red-600">Myaccount</a></li>
+          <li><a href="{% url 'mystore' %}" class="font-bold text-red-600">Mystore</a></li>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="font-bold text-red-600">logout</button>
+        </form>
+          {% else %}
+          <li><a href="{% url 'login' %}" class="font-bold text-red-600">Login</a></li>
+          <li><a href="{% url 'signup' %}" class="font-bold text-white px-3 py-1.5 bg-red-600">Signup</a></li>
+          {% endif %}
+        </ul>
+        <div class="absolute top-4 right-4 cursor-pointer md:hidden text-2xl font-bold text-red-600" id="nav-close">
+          <i class="fa-solid fa-x"></i>
+        </div>
+      </div>
+
+      <div class="flex space-x-4 text-red-700">
+        {% if cart|length == 0%}
+        <i class="fa-solid fa-user text-lg cursor-pointer"></i>
+        {% else %}
+        <div class="flex items-center gap-2">
+          <a href=""><i class="fa-solid fa-user text-lg cursor-pointer"></i></a>
+          <a href="{% url 'cart_view' %}"><i class="fa-solid fa-cart-shopping text-lg font-bold cursor-pointer"></i>{{cart|length}}</a>
+        </div>
+        {% endif %}
+      </div>
+    </nav>
+    <hr class="w-full bg-black shadow-2xl">
+    <div class="px-8 mt-10 md:pl-20 mb-4">
+      <form action="/search/" method="get">
+      <input type="search" name="query" id="" class="px-3 py-1.5 bg-gray-100 border bg-gray-200 border-gray-200 text-sm rounded-md">
+      <button><i class="fa-solid fa-magnifying-glass cursor-pointer text-lg font-bold"></i></button>
+    </div>
+  </form>
+ </header>
+
+<div class="mb-10">
+  {% block content %}
+
+  {% endblock %}
+</div>
+
+  {% block scripts %}
+
+  {% endblock %}
+
+  <div class="bg-red-600 w-full pt-16 md:pt-20 px-8">
+    <div class="flex flex-col-reverse items-center gap-10 md:flex-row md:justify-between xl:px-20">
+      <div>
+        <img src="{% static 'images/footer_image2.png' %}" alt="">
+      </div>
+        <div class="">
+          <div class="flex flex-col">
+            <p class="text-lg uppercase font-bold text-gray-200 md:text-4xl lg:text-6xl">Up to 50% off!!</p>
+           <h1 class="text-2xl font-bold font-base text-zinc-400 capitalize">exclusive sneakers sale</h1>
+            <p class="text-lg uppercase font-bold text-yellow-500">black friday</p>
+          </div>
+          <button class="px-4 rounded-md py-1.5 capitalize bg-white text-black inline-block mt-6">Shop Now</button>
+        </div>
+    </div>
+  </div>
+</body>
+  <script src="{% static 'main.js' %}"></script>
+</html>

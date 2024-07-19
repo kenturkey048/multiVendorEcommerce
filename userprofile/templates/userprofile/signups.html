@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Signup{% endblock%}
+
+
+
+{% block  content %}
+<div class="pt-28 pb-6">
+  <div class="container mx-auto px-8">
+    <h1 class="text-center mx-auto font-bold pt-6 mb-6 text-2xl capitalize md:text-4xl">Signup</h1>
+    <div class="flex justify-center gap-6">
+        <form action="." method="post" class="flex flex-col gap-6 border shadow-lg p-4">
+          {% csrf_token %}
+          <div>
+            {{form.username|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.username class="focus:bg-gray-300 w-full rounded-md bg-slate-400 p-2 text-sm border" %}
+          </div>
+
+          <div>
+            {{form.password1|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.password1 class="focus:bg-gray-300 w-full rounded-md bg-slate-400 p-2 text-sm border" %}
+          </div>
+
+          <div>
+            {{form.password2|add_label_class:"text-sm capitalize font-bold"}}
+            {% render_field form.password2 class="focus:bg-gray-300 w-full rounded-md bg-slate-400 p-2 text-sm border" %}
+          </div>
+          <button class="px-3 py-2 bg-red-700 inline-block text-white capitalize">Signup</button>
+          <div class="mt-1 mb-4 flex items-center space-x-2">
+            <p class="text-sm">Already have an account? </p>
+            <a href="{% url 'login' %}" class="text-sm inline-block text-red-400">Login</a>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

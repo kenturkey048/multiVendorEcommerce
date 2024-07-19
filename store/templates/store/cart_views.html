@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}cart{% endblock %}
+
+{% block content %}
+<div class="mt-20 pt-28 md:pt-40 pb-8">
+    <div class="px-8 flex flex-col md:flex-row md:space-x-6 md:justify-center">
+        <div class="flex flex-col gap-4 md:w-2/3 lg:max-w-xl">
+          {% if cart|length %}
+          {% for item in cart %}
+          <div class="flex items-center justify-between flex-wrap border p-2 shadow-lg">
+                <div class="flex items-center">
+                    <img src="{{product.image.url}}" alt="" class="w-16">
+                    <div>
+                      <p class="text-xs ">{{item.product.title}}</p>
+                      <p class="text-xs text-red-700">${{item.product.get_display_price}}</p>
+                      <div class="flex items-center">
+                        <a href="{% url 'change_quantity' item.product.id %}?action=decrease"><p class="cursor-pointer font-bold text-sm pr-1">-</p></a>
+                        <h1 class="text-sm pl-1">{{item.quantity}}</h1>
+                        <a href="{% url 'change_quantity' item.product.id %}?action=increase"><p class="cursor-pointer font-bold text-sm pl-1">+</p></a>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="">
+                  <a href="{% url 'remove_from_cart' item.product.id %}"><i class="fa-solid fa-trash text-xs"></i></a>
+                </div>
+
+                <div>
+                  <h1 class="text-xs font-bold">${{item.product.get_display_price}}</h1>
+                </div>
+          </div>
+          
+          {% endfor %}
+
+
+          <div class="flex items-center justify-between flex-wrap border p-2 shadow-lg">
+            <div class="flex items-center">
+                <h1><strong>Total:</strong></h1>
+            </div>
+
+            <div>
+              <h1 class="text-xs font-bold">${{cart.get_total_cost}}</h1>
+            </div>
+          </div>
+
+          <a href="{% url 'checkout' %}" class="inline-block px-4 py-2 bg-red-800 rounded-sm text-white text-center capitalize md:w-fit">Proceed to Checkout</a>
+        </div>
+
+        <div class="border p-2 mt-10 md:mt-0 shadow-lg md:w-1/3 lg:max-w-xl">
+          <h1 class="text-center pt-2 capitalize text-sm">Coupon Code</h1>
+          <p class="pt-2 text-start text-xs pl-1 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor rem facilis eos quas aut optio dolorum dolores odio a neque vero.</p>
+          <input type="number" class="w-44 mt-4 p-1.5 border-gray-300 focus:border-gray-400 border pr-16 rounded-md" placeholder="coupon code">
+          <button class="inline-block bg-red-600 mt-4 px-4 py-2 rounded-md capitalize text-sm text-white">apply</button>
+          <div class="bg-yellow-700 mt-6 p-4 text-white rounded-md">
+            <div>
+              <div class="flex justify-between">
+              <h1 class="capitalize text-sm">cart Total:</h1>
+              <span class="text-sm">$00</span>
+              </div>
+
+              <div class="flex justify-between">
+              <p class="text-sm capitalize">Discount:</p>
+              <span class="text-sm">-$00</span>
+              </div>
+
+              <div class="flex justify-between">
+              <p class="text-sm capitalize">Total: </p>
+              <span class="text-sm">$00</span>
+              </div>
+            </div>
+            <a href="" class="inline-block mt-4 w-full text-center text-black bg-white px-3 py-1.2">Checkout</a>
+          </div>
+          {% else %}
+          <p>Your cart is empty </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

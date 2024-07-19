@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Success{% endblock %}
+
+
+{% block content %}
+    <div class="mt-20 pt-16 md:pt-20 pb-6 py-96">
+        <div class="pt-10 px-8">
+            <p class="text-sm font-bold capitalize">thank you for shopping with us</p>
+            <a href="{% url 'frontpage' %}" class="py-2 px-4 bg-red-600 text-white mt-6 inline-block capitalize">back to home</a>
+        </div>
+    </div>
+{% endblock %}

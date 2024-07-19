@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{product.title}}{% endblock %}
+
+{% block content %}
+        <div class="pt-24 md:pt-28 xl:pt-40 pb-6 px-8 mt-20">
+            <div class="">
+                <div class="flex flex-col gap-10 md:flex-row">
+                    <div class="md:basis-1/2 lg:basis-2/5 mx-auto">
+                        <img src="{{product.image.url}}" alt="" class="">
+                    </div>
+                    <div class="md:basis-1/2 lg:basis-3/5">
+                        <div class="flex flex-col items-start text-start md:mx-auto">
+                            <p class="font-bold text-2xl text-black">{{product.title}}</p>
+                            <h1 class="pt-1 font-bold text-red-600 text-4xl">${{product.get_display_price}}</h1>
+                            <a href="{% url 'vendor_detail' user.id %}"><p class="text-sm text-black inline-block mt-2">{% firstof product.user.get_full_name product.user.username %}</p></a>
+                            <div class="mt-6">
+                                <h1 class="text-2xl font-bold capitalize underline">Product description</h1>
+                                {% if product.description %}
+                                <p class="pt-2 leading-5 text-sm">{{product.description}}</p>
+                                {% endif %}
+                            </div>
+                            <select name="" id="" class="mt-6 px-3 py-1.5 bg-slate-300 rounded-md">
+                                <option value="">select size</option>
+                                <option value="">8</option>
+                                <option value="">9</option>
+                                <option value="">10</option>
+                                <option value="">11</option>
+                            </select>
+                            <div>
+                                <a href="{% url 'add_to_cart' product.id %}" class="inline-block mt-6 px-3 py-2 bg-red-700 text-white capitalise text-sm">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="pt-10 pb-6">
+            <div class="px-8">
+                <h1 class="pb-10 text-2xl font-bold capitalize xl:text-center xl:text-4xl">Related Products</h1>
+                <div class="flex flex-col gap-6 md:flex-row xl:px-20 mx-auto">
+                    <div class="p-5 bg-slate-300 grid grid-cols-2 space-x-2">
+                        <div>    
+                        <img src="{% static 'images/product_2.jpg' %}" alt="" class="w-48">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <h1 class="font-bold text-sm">Classic Wears</h1>
+                            <p class="text-xs">Lorem ipsum dolor sit</p>
+                            <a href="" class="text-red-700 text-sm capitalize">buy now</a>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-slate-300 grid grid-cols-2 space-x-2">
+                        <div>    
+                        <img src="{% static 'images/product_6.jpg' %}" alt="" class="w-48">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <h1 class="font-bold text-sm">Classic Wears</h1>
+                            <p class="text-xs">Lorem ipsum dolor sit</p>
+                            <a href="" class="text-red-700 text-sm capitalize">buy now</a>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-slate-300 grid grid-cols-2 space-x-2">
+                        <div>    
+                        <img src="{% static 'images/product_5.jpg' %}" alt="" class="w-48">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <h1 class="font-bold text-sm">Classic Wears</h1>
+                            <p class="text-xs">Lorem ipsum dolor sit</p>
+                            <a href="" class="text-red-700 text-sm capitalize">buy now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
