@@ -1,4 +1,4 @@
-requirements.text
+requirements.txt
 manage.py
 db.sqlite3
 settings.py
